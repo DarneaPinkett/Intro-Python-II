@@ -5,3 +5,6 @@ class Item():
 
     def pickUp(self):
         print(f"{self.name} was picked up")
+
+    def drop(self):
+        print(f"{self.name} was put down")
