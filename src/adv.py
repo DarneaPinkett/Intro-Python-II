@@ -40,8 +40,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player("THOR", room['outside'], item=[])
-
+player = Player(input("Create a name: "), room['outside'])
+print(f'Time to begin you adventure, {player.name}')
+print(player.current_room.description)
 
 # Write a loop that:
 #
@@ -54,18 +55,25 @@ player = Player("THOR", room['outside'], item=[])
 #
 # If the user enters "q", quit the game.
 
-directions = {'n': 'n_to', 's': 's_to', 'e': 'e_to', 'w': 'w_to'}
+choice = 1
 
-while True:
-    print(player.room.name)
-    print(player.room.description)
+while choice:
+    choice = input('Which way would you like to go n/s/e/w or q(quit)')
+    if choice == 'n':
+        player.move(choice)
 
-    choice = input("Which direction are you going?")
+    elif choice == 's':
+        player.move(choice)
 
-    direction = directions[choice]
+    elif choice == 'e':
+        player.move(choice)
 
-    try:
-        player.room = getattr(player.room, direction)
+    elif choice == 'w':
+        player.move(choice)
 
-    except AttributeError:
-        print("Sorry, dead end")
+    elif choice == 'q':
+        choice = False
+    else:
+        print("You can't go there!")
+
+

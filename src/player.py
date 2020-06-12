@@ -1,20 +1,20 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
 
-from item import Item
 
 class Player:
-    def __init__(self, name, room, item = []):
-        super().__init__(item)
+    def __init__(self, name, current_room):
         self.name = name
-        self.room = room
+        self.current_room = current_room
 
-    def pickUpItem(self,item):
-        self.item.append(item)
-
-    def dropItem(self, item):
-        self.item.remove(item)
-
+    def move(self, direction):
+        newRoom = getattr(self.current_room, f"{direction}_to")
+        if newRoom == None:
+            print("Try another direction")
+        elif newRoom is not None:
+            self.current_room = newRoom
+            print("You are now in", self.current_room.name)
+            print(self.current_room.description)
 
     def __str__(self):
-        return f"Player Name: {self.name} \nPlayers {self.room}"
+        return f"Player Name: {self.name} \nPlayers {self.current_room}"
