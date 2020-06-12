@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -39,8 +40,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player('Queen', room['outside'])
-print("\n Welcome player!")
+player = Player("THOR", room['outside'], item=[])
+
 
 # Write a loop that:
 #
@@ -53,35 +54,18 @@ print("\n Welcome player!")
 #
 # If the user enters "q", quit the game.
 
+directions = {'n': 'n_to', 's': 's_to', 'e': 'e_to', 'w': 'w_to'}
 
+while True:
+    print(player.room.name)
+    print(player.room.description)
 
+    choice = input("Which direction are you going?")
 
-choice = ['n', 's', 'e', 'w', 'q']
-while choice:
-    print(str(player.current_room))
-    choice = input("Which direction would you like to move to?")
+    direction = directions[choice]
+
     try:
-        if choice == 'n':
-            if player.current_room.n_to:
-                player.current_room = player.current_room.n_to
-            else:
-                print("Sorry dead end!")
-        elif choice == 'e':
-            if player.current_room.e_to:
-                player.current_room = player.current_room.e_to
-            else:
-                print("Sorry dead end!")
-        elif choice == 'w':
-            if player.current_room.w_to:
-                player.current_room = player.current_room.w_to
-            else:
-                print("Sorry dead end!")
-        elif choice == 's':
-            if player.current_room.s_to:
-                player.current_room = player.current_room.s_to
-            else:
-                print("Sorry dead end!")
-        elif choice == 'q':
-            exit(0)
-    except:
-        print("Please choose between n/s/e/w")
+        player.room = getattr(player.room, direction)
+
+    except AttributeError:
+        print("Sorry, dead end")
