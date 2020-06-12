@@ -46,7 +46,7 @@ axe = Item('axe', 'Protect yourself')
 key = Item('key', 'Keep this safe')
 chest = Item('chest', 'Use the key')
 
-player = Player(input("Create a name: "), room['outside'])
+player = Player(input("Create a name: "), room['outside'].showItems())
 print(f'Time to begin you adventure, {player.name}')
 print(player.current_room.description)
 
@@ -69,7 +69,7 @@ room['treasure'].items.append(chest)
 choice = 1
 
 while True:
-    choice = input('Which way would you like to go? Choose n, e, s, or w! \nTo view your inventory press i, \nTo take item enter take \nand to quit q.')
+    choice = input('Which way would you like to go? Choose n, e, s, or w. \nTo view your inventory press i, \nTo take item enter take \nand to quit q.')
     if choice == 'n':
         player.move(choice)
 

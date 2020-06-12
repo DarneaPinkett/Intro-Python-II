@@ -16,6 +16,7 @@ class Player:
             self.current_room = newRoom
             print("You are now in", self.current_room.name)
             print(self.current_room.description)
+            self.current_room.showItems()
 
     def __str__(self):
         return f"Player Name: {self.name} \nPlayers {self.current_room}"
