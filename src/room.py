@@ -14,7 +14,7 @@ class Room():
         self.items = []
 
     def showItems(self):
-        if len(self_items) == 0:
+        if len(self.items) == 0:
             print("No items in room")
         else:
             print(f'You find a ')

@@ -40,9 +40,20 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+
+flaslight = Item('Flashlight', 'use the light to guide you')
+axe = Item('axe', 'Protect yourself')
+key = Item('key', 'Keep this safe')
+chest = Item('chest', 'Use the key')
+
 player = Player(input("Create a name: "), room['outside'])
 print(f'Time to begin you adventure, {player.name}')
 print(player.current_room.description)
+
+room['outside'].items.append(key)
+room['foyer'].items.append(flaslight)
+room['narrow'].items.append(axe)
+room['treasure'].items.append(chest)
 
 # Write a loop that:
 #
@@ -57,8 +68,8 @@ print(player.current_room.description)
 
 choice = 1
 
-while choice:
-    choice = input('Which way would you like to go n/s/e/w or q(quit)')
+while True:
+    choice = input('Which way would you like to go? Choose n, e, s, or w! \nTo view your inventory press i, \nTo take item enter take \nand to quit q.')
     if choice == 'n':
         player.move(choice)
 
@@ -71,8 +82,22 @@ while choice:
     elif choice == 'w':
         player.move(choice)
 
+    elif choice == 'i':
+        player.viewItems()
+
+    elif choice.startswith('Take'):
+        item = choice.split(' ')[1]
+        player.getItem(item)
+        player.viewItems()
+    
+    elif choice.startswith('Drop'):
+        item = choice.split(' ')[1]
+        player.putDown(item)
+        player.viewItems()
+
     elif choice == 'q':
-        choice = False
+        print(f'Game over')
+        break
     else:
         print("You can't go there!")
 
