@@ -3,5 +3,8 @@ class Item():
         self.name = name
         self.description = description
 
-    def __str__(self):
-        return f"You have {self.name} \n {self.description}"
+    def pickUp(self):
+        return f'You picked up {self.name}'
+
+    def putDown(self):
+        return f'You put down {self.name}'
